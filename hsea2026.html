@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyderabad Startup Ecosystem Awards 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0a0f1e;
+    --navy-mid: #111827;
+    --navy-light: #1a2540;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --cream: #faf6ee;
+    --text-muted: #8a95aa;
+    --border: rgba(201,168,76,0.18);
+    --border-subtle: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(10,15,30,0.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 500; letter-spacing: 0.12em;
+    color: var(--gold-light); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    position: relative; overflow: hidden;
+    padding: 8rem 2rem 6rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    overflow: hidden;
+  }
+
+  /* Geometric background pattern */
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 10%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  .hero-skyline {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 1;
+    opacity: 0.12;
+  }
+
+  .hero-ornament {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 1;
+    opacity: 0.04;
+    background-image: repeating-linear-gradient(
+      45deg,
+      var(--gold) 0px, var(--gold) 1px,
+      transparent 1px, transparent 60px
+    );
+    height: 100%;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 1rem;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px; background: var(--gold); opacity: 0.5;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 300; line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+
+  .hero-title .accent { color: var(--gold-light); font-style: italic; }
+
+  .hero-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 300; line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(201,168,76,0.3);
+    letter-spacing: 0.05em;
+    margin: -0.5rem 0 1.5rem;
+    opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+
+  .hero-tagline {
+    font-size: 0.95rem; font-weight: 300; letter-spacing: 0.08em;
+    color: var(--text-muted); margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-meta {
+    display: flex; align-items: center; justify-content: center;
+    gap: 2.5rem; flex-wrap: wrap;
+    margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.75s forwards;
+  }
+  .hero-meta-item {
+    display: flex; flex-direction: column; align-items: center; gap: 0.2rem;
+  }
+  .meta-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); opacity: 0.7; }
+  .meta-value { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 500; color: var(--cream); letter-spacing: 0.05em; }
+  .meta-divider { width: 1px; height: 36px; background: var(--border); }
+
+  .hero-cta {
+    opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 2.5rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy);
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; text-decoration: none;
+    border: none; cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* countdown */
+  .countdown {
+    display: flex; gap: 1.5rem; justify-content: center;
+    margin-top: 3rem;
+    opacity: 0; animation: fadeUp 0.8s ease 1s forwards;
+  }
+  .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 400; line-height: 1;
+    color: var(--gold-light);
+    min-width: 60px; text-align: center;
+  }
+  .cd-label { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+  .cd-sep { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--border); line-height: 1; padding-top: 0.1rem; }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 7rem 4rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold); opacity: 0.4; }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--cream); margin-bottom: 0.75rem;
+  }
+  .section-heading em { color: var(--gold-light); font-style: italic; }
+
+  .divider-gold { width: 60px; height: 2px; background: linear-gradient(to right, var(--gold), transparent); margin: 1.5rem 0; }
+
+  /* ── S2 ABOUT ── */
+  #about { background: var(--navy-mid); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+
+  .about-text p { color: rgba(250,246,238,0.75); font-size: 1rem; margin-bottom: 1.25rem; line-height: 1.8; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .stat-cell {
+    background: var(--navy-mid);
+    padding: 1.75rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 400; color: var(--gold-light); line-height: 1;
+  }
+  .stat-desc { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em; }
+
+  .poweredby {
+    margin-top: 2.5rem; padding-top: 2rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .pb-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
+  .pb-partners { display: flex; flex-direction: column; gap: 0.4rem; }
+  .pb-partner { font-size: 0.85rem; color: var(--gold-pale); font-weight: 400; }
+  .pb-partner span { font-size: 0.75rem; color: var(--text-muted); display: block; }
+
+  /* ── S3 PROGRAMME ── */
+  #programme { background: var(--navy); }
+
+  .programme-header { margin-bottom: 4rem; }
+
+  .programme-parts { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+  .programme-part {
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .programme-part:hover { border-color: rgba(201,168,76,0.4); }
+
+  .part-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; font-weight: 300;
+    color: transparent; -webkit-text-stroke: 1px rgba(201,168,76,0.15);
+    position: absolute; top: 1.5rem; right: 2rem;
+    line-height: 1; pointer-events: none;
+  }
+
+  .part-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+  .part-time { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--cream); margin-bottom: 0.5rem; }
+  .part-title { font-size: 1rem; font-weight: 500; color: var(--cream); margin-bottom: 0.75rem; }
+  .part-desc { font-size: 0.88rem; color: rgba(250,246,238,0.65); line-height: 1.7; }
+  .part-book { margin-top: 1.25rem; padding: 1rem; background: rgba(201,168,76,0.06); border-left: 2px solid var(--gold); }
+  .part-book-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--gold-light); }
+  .part-book-author { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  .timeline { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .tl-item { display: flex; gap: 1rem; align-items: baseline; }
+  .tl-time { font-size: 0.72rem; color: var(--gold); letter-spacing: 0.05em; white-space: nowrap; min-width: 70px; }
+  .tl-event { font-size: 0.85rem; color: rgba(250,246,238,0.7); }
+
+  /* ── S4 AWARDS ── */
+  #awards { background: var(--navy-mid); }
+
+  .awards-intro { max-width: 600px; margin-bottom: 4rem; }
+  .awards-intro p { color: rgba(250,246,238,0.65); font-size: 0.95rem; }
+
+  .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
+
+  .award-card {
+    background: var(--navy-mid);
+    padding: 1.75rem 1.75rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .award-card:hover { background: rgba(201,168,76,0.04); }
+
+  .award-num { font-size: 0.65rem; letter-spacing: 0.18em; color: var(--gold); opacity: 0.6; }
+  .award-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--cream); line-height: 1.3; }
+  .award-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.25rem; }
+
+  .award-legacy {
+    background: rgba(201,168,76,0.06);
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 2.5rem;
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+  }
+  .legacy-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  .legacy-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--gold-light); line-height: 1.2; }
+  .legacy-desc { font-size: 0.85rem; color: rgba(250,246,238,0.65); margin-top: 0.75rem; line-height: 1.7; }
+  .legacy-icon { font-size: 3rem; opacity: 0.25; }
+
+  /* ── S5 VENUE ── */
+  #venue { background: var(--navy); }
+
+  .venue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+
+  .venue-detail { margin-bottom: 1.5rem; }
+  .vd-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .vd-value { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--cream); }
+  .vd-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.15rem; }
+
+  .venue-map {
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    height: 320px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+
+  /* Decorative map placeholder */
+  .venue-map::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(201,168,76,0.05) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(201,168,76,0.05) 40px);
+  }
+  .map-marker {
+    position: relative; z-index: 2; text-align: center;
+  }
+  .map-pin { font-size: 2.5rem; }
+  .map-label { font-size: 0.75rem; color: var(--gold-light); letter-spacing: 0.1em; margin-top: 0.5rem; }
+  .map-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.72rem; color: var(--gold); letter-spacing: 0.1em;
+    text-decoration: none; margin-top: 0.4rem;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 1px;
+    transition: border-color 0.2s;
+  }
+  .map-link:hover { border-color: var(--gold); }
+
+  .dress-code {
+    margin-top: 2.5rem; padding: 1.25rem 1.5rem;
+    border: 1px solid var(--border-subtle);
+    border-left: 2px solid var(--gold);
+  }
+  .dc-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .dc-value { font-size: 0.88rem; color: rgba(250,246,238,0.75); }
+
+  /* ── S6 PARTNERS ── */
+  #partners { background: var(--navy-mid); padding: 5rem 4rem; }
+
+  .partners-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+
+  .partner-card {
+    border: 1px solid var(--border);
+    padding: 2rem 2rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    transition: border-color 0.3s;
+  }
+  .partner-card:hover { border-color: rgba(201,168,76,0.35); }
+
+  .partner-role { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.25rem; }
+  .partner-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--cream); line-height: 1.3; }
+  .partner-person { font-size: 0.8rem; color: var(--gold-light); margin-top: 0.2rem; }
+  .partner-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; margin-top: 0.25rem; }
+
+  /* ── S7 CONTACT ── */
+  #contact { background: var(--navy); padding: 7rem 4rem; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+
+  .contact-left p { font-size: 0.95rem; color: rgba(250,246,238,0.65); margin-bottom: 1.5rem; line-height: 1.8; }
+
+  .invite-note {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border);
+    font-size: 0.75rem; letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 1rem;
+  }
+  .invite-note::before { content: '◆'; color: var(--gold); font-size: 0.5rem; }
+
+  .contact-items { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
+  .ci-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+  .ci-value { font-size: 0.95rem; color: var(--cream); }
+  .ci-value a { color: var(--gold-light); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,0.25); padding-bottom: 1px; transition: border-color 0.2s; }
+  .ci-value a:hover { border-color: var(--gold-light); }
+  .ci-sub { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-mid);
+    border-top: 1px solid var(--border-subtle);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .footer-left { display: flex; flex-direction: column; gap: 0.3rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: var(--gold-light); letter-spacing: 0.08em; }
+  .footer-copy { font-size: 0.72rem; color: var(--text-muted); }
+
+  .footer-right { font-size: 0.72rem; color: var(--text-muted); text-align: right; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    #partners { padding: 4rem 1.5rem; }
+    #contact { padding: 5rem 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+    .about-grid, .programme-parts, .venue-grid, .partners-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .awards-grid { grid-template-columns: 1fr; }
+    .award-legacy { grid-template-columns: 1fr; }
+    .legacy-icon { display: none; }
+    .hero-meta { gap: 1.5rem; }
+    .meta-divider { display: none; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HSEA · 2026</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programme">Programme</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#venue">Venue</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- S1: HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-ornament"></div>
+    <!-- Raj Bhavan Silhouette SVG -->
+    <svg class="hero-skyline" viewBox="0 0 1440 220" preserveAspectRatio="xMidYMax meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Skyline silhouette suggestion of Raj Bhavan / Hyderabad architecture -->
+      <path fill="#c9a84c" d="
+        M0,220 L0,160 L40,160 L40,140 L60,140 L60,120 L70,120 L70,100 L80,100 L80,90 L85,90 L85,80 L90,80 L90,90 L95,90 L95,80 L100,80 L100,90 L105,90 L105,100 L110,100 L110,120 L120,120 L120,140 L140,140 L140,160 L160,160
+        L160,110 L165,110 L165,90 L170,85 L175,90 L175,110 L180,110 L180,160
+        L200,160 L200,130 L210,120 L220,110 L230,105 L240,110 L250,120 L260,130 L260,160
+        L280,160 L280,145 L285,140 L285,130 L295,125 L295,115 L300,110 L305,115 L305,125 L315,130 L315,140 L320,145 L320,160
+        L340,160 L340,150 L350,140 L360,135 L370,140 L380,150 L380,160
+        L400,160 L400,100 L405,95 L408,85 L412,80 L416,75 L420,72 L424,75 L428,80 L432,85 L435,95 L440,100 L440,160
+        L460,160 L460,140 L470,130 L480,125 L490,130 L500,140 L500,160
+        L520,160 L520,150 L540,150 L540,145 L545,140 L545,130 L550,125 L555,130 L555,140 L560,145 L560,150 L580,150 L580,160
+        L600,160 L600,120 L610,110 L618,105 L622,100 L626,105 L634,110 L640,120 L640,160
+        L660,160 L660,145 L665,140 L668,130 L672,125 L676,130 L680,140 L682,145 L682,160
+        L700,160 L700,130 L710,120 L720,115 L730,120 L740,130 L740,160
+        L760,160 L760,110 L770,100 L775,90 L780,85 L785,90 L790,100 L795,110 L795,160
+        L820,160 L820,140 L830,130 L840,125 L850,130 L860,140 L860,160
+        L880,160 L880,120 L890,110 L895,105 L900,100 L905,105 L910,110 L920,120 L920,160
+        L940,160 L940,145 L950,140 L960,135 L970,140 L980,145 L980,160
+        L1000,160 L1000,105 L1010,95 L1015,85 L1020,80 L1025,85 L1030,95 L1040,105 L1040,160
+        L1060,160 L1060,140 L1070,130 L1080,125 L1090,130 L1100,140 L1100,160
+        L1120,160 L1120,150 L1130,140 L1135,130 L1140,125 L1145,130 L1150,140 L1155,150 L1155,160
+        L1180,160 L1180,120 L1185,115 L1185,100 L1190,95 L1195,90 L1200,85 L1205,90 L1210,95 L1215,100 L1215,115 L1220,120 L1220,160
+        L1240,160 L1240,145 L1255,140 L1255,160
+        L1280,160 L1280,130 L1285,120 L1295,110 L1300,105 L1305,110 L1315,120 L1320,130 L1320,160
+        L1360,160 L1360,145 L1370,140 L1380,145 L1380,160
+        L1440,160 L1440,220 Z"
+      />
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Hyderabad · Telangana · India</div>
+    <h1 class="hero-title">Hyderabad Startup<br><span class="accent">Ecosystem Awards</span></h1>
+    <div class="hero-year">2026</div>
+    <p class="hero-tagline">Celebrating the Builders, Dreamers & Disruptors Shaping India's Innovation Capital</p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="meta-label">Date</span>
+        <span class="meta-value">26th June 2026</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Time</span>
+        <span class="meta-value">4:00 PM Onwards</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Venue</span>
+        <span class="meta-value">Raj Bhavan, Hyderabad</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="hero-meta-item">
+        <span class="meta-label">Format</span>
+        <span class="meta-value">Invite Only</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#awards" class="btn-primary">View Award Categories →</a>
+    </div>
+
+    <div class="countdown" id="countdown">
+      <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Seconds</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- S2: ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">About the Event</div>
+        <h2 class="section-heading">Where Hyderabad Honours Its <em>Own</em></h2>
+        <div class="divider-gold"></div>
+        <p>The Hyderabad Startup Ecosystem Awards is a first-of-its-kind recognition platform dedicated to celebrating the extraordinary founders, companies, and enablers who have placed Hyderabad on India's — and the world's — startup map.</p>
+        <p>From deep-tech breakthroughs and fintech innovations to social enterprises and generational legacies, this awards ceremony acknowledges the full spectrum of entrepreneurial achievement rooted in the City of Pearls.</p>
+        <p>Held at the distinguished Samskruthi Hall, Raj Bhavan — the seat of the Governor of Telangana — the evening brings together 100–150 leaders from across the ecosystem for an intimate, prestigious ceremony befitting the magnitude of what Hyderabad has built.</p>
+        <div class="poweredby">
+          <div class="pb-label">Powered By</div>
+          <div class="pb-partners">
+            <div class="pb-partner">
+              Mudrika Secure Print & Pack Pvt. Ltd.
+              <span>Presenting Partner · Dr. Uday Murthy Bhogadi</span>
+            </div>
+            <div class="pb-partner" style="margin-top: 0.5rem;">
+              Yatharth Digital
+              <span>Digital Partner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay: 0.15s;">
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <div class="stat-num">10</div>
+            <div class="stat-desc">Award Categories</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">1</div>
+            <div class="stat-desc">Lifetime Achievement</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">150</div>
+            <div class="stat-desc">Distinguished Guests</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">5</div>
+            <div class="stat-desc">Decades of Legacy Honoured</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: PROGRAMME -->
+<section id="programme">
+  <div class="section-inner">
+    <div class="programme-header reveal">
+      <div class="section-label">Programme</div>
+      <h2 class="section-heading">An Evening in <em>Two Acts</em></h2>
+      <div class="divider-gold"></div>
+      <p style="color: rgba(250,246,238,0.55); font-size: 0.88rem; max-width: 520px;">Thursday, 26th June 2026 · Samskruthi Hall, Raj Bhavan, Hyderabad · Doors Open at 3:45 PM</p>
+    </div>
+
+    <div class="programme-parts">
+      <div class="programme-part reveal">
+        <div class="part-number">I</div>
+        <div class="part-label">Part One · 4:10 — 4:50 PM</div>
+        <div class="part-title">Book Launch</div>
+        <div class="part-book">
+          <div class="part-book-title">"The CEO She Never Knew She Was"</div>
+          <div class="part-book-author">by Dr. Uday Murthy Bhogadi</div>
+        </div>
+        <div class="part-desc" style="margin-top: 1rem;">A landmark book launch celebrating the untold stories of women who discovered their leadership long before the world gave them the title. An evening of insight, inspiration and cultural conversation.</div>
+        <div class="timeline" style="margin-top: 1.25rem;">
+          <div class="tl-item"><span class="tl-time">4:10 PM</span><span class="tl-event">Welcome & Introduction</span></div>
+          <div class="tl-item"><span class="tl-time">4:20 PM</span><span class="tl-event">Book Unveiling & Author Address</span></div>
+          <div class="tl-item"><span class="tl-time">4:35 PM</span><span class="tl-event">Felicitation & Vote of Thanks</span></div>
+          <div class="tl-item"><span class="tl-time">4:50 PM</span><span class="tl-event">Transition · Refreshments</span></div>
+        </div>
+      </div>
+
+      <div class="programme-part reveal" style="transition-delay: 0.15s;">
+        <div class="part-number">II</div>
+        <div class="part-label">Part Two · 4:57 — 6:35 PM</div>
+        <div class="part-title">Hyderabad Startup Ecosystem Awards Ceremony</div>
+        <div class="part-desc">A solemn and celebratory recognition of Hyderabad's finest — founders, innovators, enablers, and legends who have defined what it means to build from this city.</div>
+        <div class="timeline" style="margin-top: 1.25rem;">
+          <div class="tl-item"><span class="tl-time">4:57 PM</span><span class="tl-event">Ceremonial Opening</span></div>
+          <div class="tl-item"><span class="tl-time">5:00 PM</span><span class="tl-event">Chief Guest Address</span></div>
+          <div class="tl-item"><span class="tl-time">5:15 PM</span><span class="tl-event">Awards Presentation — 10 Categories</span></div>
+          <div class="tl-item"><span class="tl-time">6:15 PM</span><span class="tl-event">Hyderabad Founder's Legacy Award</span></div>
+          <div class="tl-item"><span class="tl-time">6:30 PM</span><span class="tl-event">Closing Remarks & Group Photo</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S4: AWARDS -->
+<section id="awards">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Award Categories</div>
+      <h2 class="section-heading">Ten Ways to <em>Change the World</em></h2>
+      <div class="divider-gold"></div>
+    </div>
+    <div class="awards-intro reveal">
+      <p>The HSEA 2026 recognises excellence across ten categories that represent the breadth and depth of Hyderabad's startup ecosystem — from cutting-edge science to social impact, from early-stage promise to growth-stage mastery.</p>
+    </div>
+
+    <div class="awards-grid">
+      <div class="award-card reveal">
+        <div class="award-num">Category 01</div>
+        <div class="award-name">Deep Tech & Innovation Excellence</div>
+        <div class="award-desc">Recognising startups pushing the boundaries of science, engineering and emerging technology to solve problems at scale.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 02</div>
+        <div class="award-name">FinTech & Financial Inclusion Champion</div>
+        <div class="award-desc">Honouring companies reimagining how India manages, moves and accesses money — with equity at the core.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 03</div>
+        <div class="award-name">HealthTech & Life Sciences Trailblazer</div>
+        <div class="award-desc">Celebrating innovations in healthcare delivery, diagnostics, biotech and life sciences improving outcomes for millions.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 04</div>
+        <div class="award-name">Enterprise SaaS & B2B Excellence</div>
+        <div class="award-desc">Acknowledging software-first companies building products that power enterprises across India and the world.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 05</div>
+        <div class="award-name">Consumer Tech & D2C Disruptor</div>
+        <div class="award-desc">For the founders who saw what the Indian consumer needed before anyone else did — and built it.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 06</div>
+        <div class="award-name">Best Early Stage Startup</div>
+        <div class="award-desc">Spotlighting the most promising ventures under 3 years old that are already demonstrating exceptional potential.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 07</div>
+        <div class="award-name">Growth Stage Startup of the Year</div>
+        <div class="award-desc">For the companies that have crossed proof-of-concept and are scaling with discipline, speed and purpose.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 08</div>
+        <div class="award-name">Social Impact & Bharat-First Startup</div>
+        <div class="award-desc">Recognising ventures placing underserved communities and national self-reliance at the heart of their mission.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 09</div>
+        <div class="award-name">Woman Founder of the Year</div>
+        <div class="award-desc">Honouring the extraordinary woman entrepreneur whose vision, resilience and leadership has set a new standard.</div>
+      </div>
+      <div class="award-card reveal">
+        <div class="award-num">Category 10</div>
+        <div class="award-name">Investor / Enabler of the Ecosystem</div>
+        <div class="award-desc">For the capital providers, incubators and mentors whose belief and backing has shaped Hyderabad's startup landscape.</div>
+      </div>
+    </div>
+
+    <div class="award-legacy reveal">
+      <div>
+        <div class="legacy-tag">Special Recognition · Lifetime Achievement</div>
+        <div class="legacy-name">The Hyderabad Founder's<br>Legacy Award</div>
+        <div class="legacy-desc">Bestowed upon a founder whose lifetime of work has not only built a world-class institution but permanently elevated Hyderabad's standing as a global centre of enterprise. This award is not applied for — it is conferred.</div>
+      </div>
+      <div class="legacy-icon">✦</div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: VENUE -->
+<section id="venue">
+  <div class="section-inner">
+    <div class="venue-grid">
+      <div class="reveal">
+        <div class="section-label">Venue</div>
+        <h2 class="section-heading">A Setting <em>Befitting</em> the Occasion</h2>
+        <div class="divider-gold"></div>
+
+        <div class="venue-detail">
+          <div class="vd-label">Hall</div>
+          <div class="vd-value">Samskruthi Hall</div>
+        </div>
+        <div class="venue-detail">
+          <div class="vd-label">Address</div>
+          <div class="vd-value">Raj Bhavan, Hyderabad</div>
+          <div class="vd-sub">Governor's Estate, Raj Bhavan Road, Somajiguda, Hyderabad — 500 082, Telangana</div>
+        </div>
+        <div class="venue-detail">
+          <div class="vd-label">Date & Time</div>
+          <div class="vd-value">Thursday, 26th June 2026 · From 4:00 PM</div>
+        </div>
+        <div class="venue-detail">
+          <div class="vd-label">Attendance</div>
+          <div class="vd-value">By Invitation Only</div>
+          <div class="vd-sub">100–150 curated guests from the startup, investor and policy ecosystem</div>
+        </div>
+
+        <div class="dress-code">
+          <div class="dc-label">Dress Code</div>
+          <div class="dc-value">Formal Attire · Indian Traditional Welcome</div>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay: 0.15s;">
+        <div class="venue-map">
+          <div class="map-marker">
+            <div class="map-pin">📍</div>
+            <div class="map-label">Raj Bhavan · Hyderabad</div>
+            <a href="https://maps.google.com/?q=Raj+Bhavan+Hyderabad" target="_blank" class="map-link">Open in Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S6: PARTNERS -->
+<section id="partners">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Event Partners</div>
+      <h2 class="section-heading">Presented <em>In Association With</em></h2>
+      <div class="divider-gold"></div>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card reveal">
+        <div class="partner-role">Presenting Partner</div>
+        <div class="partner-name">Mudrika Secure Print & Pack Pvt. Ltd.</div>
+        <div class="partner-person">Dr. Uday Murthy Bhogadi, Founder</div>
+        <div class="partner-desc">A distinguished enterprise in secure printing and packaging, Mudrika brings its legacy of precision, trust and excellence to co-power this landmark celebration of Hyderabad's startup spirit.</div>
+      </div>
+      <div class="partner-card reveal" style="transition-delay: 0.12s;">
+        <div class="partner-role">Digital Partner</div>
+        <div class="partner-name">Yatharth Digital</div>
+        <div class="partner-person">Ganesh Shukla, Founder</div>
+        <div class="partner-desc">Hyderabad-based digital transformation and digital marketing agency powering the online presence, identity and outreach for HSEA 2026. Oracle Fusion advisory · Digital strategy · Brand presence.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S7: CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-heading">Media · Sponsorship<br><em>& Enquiries</em></h2>
+        <div class="divider-gold"></div>
+        <p>The Hyderabad Startup Ecosystem Awards 2026 is an exclusive, curated gathering. Attendance is strictly by invitation.</p>
+        <p>For media accreditation, sponsorship and partnership enquiries, please write to us at the contact details listed.</p>
+        <div class="invite-note">An invite-only event — attendance by nomination &amp; confirmation only</div>
+      </div>
+
+      <div class="contact-items reveal" style="transition-delay: 0.15s;">
+        <div class="contact-item">
+          <div class="ci-label">General & Media Enquiries</div>
+          <div class="ci-value"><a href="mailto:media@hsea2026.in">media@hsea2026.in</a></div>
+          <div class="ci-sub">For press, media accreditation and coverage requests</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-label">Sponsorship & Partnerships</div>
+          <div class="ci-value"><a href="mailto:partnerships@hsea2026.in">partnerships@hsea2026.in</a></div>
+          <div class="ci-sub">Category sponsorship, brand associations and co-presentations</div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-label">Website</div>
+          <div class="ci-value"><a href="https://www.hsea2026.in">www.hsea2026.in</a></div>
+          <div class="ci-sub">Official event website</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo">Hyderabad Startup Ecosystem Awards · 2026</div>
+    <div class="footer-copy">© 2026 HSEA. Powered by Mudrika Secure Print & Pack Pvt. Ltd. · Digital Partner: Yatharth Digital</div>
+  </div>
+  <div class="footer-right">
+    26th June 2026 · Samskruthi Hall, Raj Bhavan<br>
+    Hyderabad, Telangana, India
+  </div>
+</footer>
+
+<script>
+  // Countdown Timer
+  function updateCountdown() {
+    const target = new Date('2026-06-26T16:00:00+05:30');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML = '<div style="font-family:\'Cormorant Garamond\',serif;font-size:1.4rem;color:var(--gold-light);letter-spacing:0.1em;">The Evening Has Arrived</div>';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
